@@ -52,38 +52,47 @@ const NotesArea = (props) => {
       <DragDropContext
         onDragEnd={(result) => console.log("drag event occured", result)}>
         <div className="notes-main-Area">
-          <Droppable
-            droppableId="Root"
-            type="group">
-            {(provided) => (
-              <div
-                className="notes-box"
-                {...provided.droppableProps}
-                ref={provided.innerRef}>
-                {list.map((item, index) => (
-                  <Draggable
-                    draggableId={String(item.id)}
-                    key={item.id}
-                    index={index}>
-                    {(provided) => (
-                      <NotesCard
-                        key={index}
-                        item={item}
-                        number={index}
-                        notes={props.notes}
-                        setList={setList}
-                        setNotes={props.setNotes}
-                        archiveNotes={props.archiveNotes}
-                        setArchiveNotes={props.setArchiveNotes}
-                        provided={provided}
-                        innerRef={provided.innerRef}
-                      />
-                    )}
-                  </Draggable>
-                ))}
-              </div>
-            )}
-          </Droppable>
+          <div className="notes-box">
+            <Droppable
+              droppableId="Root"
+              type="group">
+              {(provided) => (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}>
+                  {list.map((item, index) => (
+                    <Draggable
+                      draggableId={String(item.id)}
+                      key={item.id}
+                      index={index}>
+                      {(provided) => (
+                        <NotesCard
+                          key={index}
+                          item={item}
+                          number={index}
+                          notes={props.notes}
+                          setList={setList}
+                          setNotes={props.setNotes}
+                          archiveNotes={props.archiveNotes}
+                          setArchiveNotes={props.setArchiveNotes}
+                          // {...provided.dragHandleProps}
+                          // {...provided.draggableProps}
+                          // ref={provided.innerRef}
+                          provided={provided}
+                          innerRef={provided.innerRef}
+                        />
+                        // <div {...provided.dragHandleProps}
+                        //  {...provided.draggableProps}
+                        //  ref={provided.innerRef} >
+                        //   hi
+                        // </div>
+                      )}
+                    </Draggable>
+                  ))}
+                </div>
+              )}
+            </Droppable>
+          </div>
         </div>
       </DragDropContext>
     </div>

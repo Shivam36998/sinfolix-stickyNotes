@@ -135,6 +135,7 @@ function App() {
               setNotes={setNotes}
               darkTheme={darkTheme}
               setDarkTheme={setDarkTheme}
+              archiveNotes={archiveNotes}
               edit={1}
             />
           }></Route>

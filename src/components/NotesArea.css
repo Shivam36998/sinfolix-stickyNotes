@@ -1,73 +1,77 @@
-.notesArea, .makeNotesArea, .fullPage{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
+/** @format */
+
+.notesArea,
+.makeNotesArea,
+.fullPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
 }
-.makeNotesArea{
-    position: relative;
+.makeNotesArea {
+  position: relative;
 }
-.notes-headerRow{
-    height: 40px;
-    background-color: rgb(84, 95, 246);
-    width: 100%;
-    border-radius: 15px 15px 0 0;
-    padding: 3px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.notes-headerRow {
+  height: 40px;
+  background-color: rgb(84, 95, 246);
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+  padding: 3px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.notes-headerRow div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    gap: 15px;
+.notes-headerRow div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  gap: 15px;
 }
-.notes-headerRow .heading-icon{
-    width: 1.2rem;
-    height: 1.2rem;
-    cursor: pointer;
-    transition: 3s ease-in-out;
+.notes-headerRow .heading-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  transition: 3s ease-in-out;
 }
-.notes-firstRow{
-    display: flex;
-    padding: 10px 30px;
-    justify-content: space-around;
-    outline: none;
-    font-size: 1rem;
-    margin-top: 10px;
+.notes-firstRow {
+  display: flex;
+  padding: 10px 30px;
+  justify-content: space-around;
+  outline: none;
+  font-size: 1rem;
+  margin-top: 10px;
 }
-.notes-firstRow:active{
-    outline-color: transparent;
+.notes-firstRow:active {
+  outline-color: transparent;
 }
-.notes-makenotes-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(82, 154, 255, 0.572);
-    padding: 10px 10px;
-    border-radius: 3px;
-    width: 30%;
-    cursor: pointer;
+.notes-makenotes-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(82, 154, 255, 0.572);
+  padding: 10px 10px;
+  border-radius: 3px;
+  width: 30%;
+  cursor: pointer;
 }
-.notes-search{
-    display: flex;
-    justify-content: center;
-    padding: 5px 20px;
-    width: 40%;
-    border-radius: 3px;
+.notes-search {
+  display: flex;
+  justify-content: center;
+  padding: 5px 20px;
+  width: 40%;
+  border-radius: 3px;
 }
-.notes-search input{
-    width: 100%;
-    background-color: transparent;
-    outline: none;
-    border: none;
-    font-size: 1rem;
-    border-bottom: 1px solid black;
-    margin-bottom: 5px;
+.notes-search input {
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  border-bottom: 1px solid black;
+  margin-bottom: 5px;
 }
 .notes-main-Area {
   display: flex;
@@ -75,6 +79,7 @@
   height: 600px;
   max-height: 75%;
   overflow: scroll !important;
+  width: 100%;
 }
 
 /* For Firefox */
@@ -94,11 +99,6 @@
 .notes-main-Area::-webkit-scrollbar-track {
   background-color: #fff; /* Color of the track */
 }
-.notes-box {
-  display: flex;
-  align-items: center;
-  overflow: scroll !important;
-}
 
 /* For Firefox */
 .notes-box {
@@ -110,71 +110,71 @@
   display: none;
 }
 
-.notes-makenotes-div{
-    display: flex;
-    flex-direction: column;
-    height: 80%;
-    width: 90%;
-    margin: 0 auto;
-    margin-bottom: 30px;
-    border-radius: 10px;
+.notes-makenotes-div {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  border-radius: 10px;
 }
-.notes-makenotes-header{
-    background-color: rgb(84, 95, 246);
-    width: 100%;
-    height: 25px;
-    border-radius: 10px 10px 0 0;
+.notes-makenotes-header {
+  background-color: rgb(84, 95, 246);
+  width: 100%;
+  height: 25px;
+  border-radius: 10px 10px 0 0;
 }
-.notes-makenotes-notes-heading{
-    width: 100%;
+.notes-makenotes-notes-heading {
+  width: 100%;
 }
-.notes-makenotes-notes-heading input{
-    width: 100%;
-    font-size: 1.25rem;
-    padding: 10px 20px;
-    background-color: transparent;
-    outline: 0;
-    border: transparent;
-    border-bottom: 1px solid rgb(84, 95, 246);
+.notes-makenotes-notes-heading input {
+  width: 100%;
+  font-size: 1.25rem;
+  padding: 10px 20px;
+  background-color: transparent;
+  outline: 0;
+  border: transparent;
+  border-bottom: 1px solid rgb(84, 95, 246);
 }
-.notes-makenotes-notes-body{
-    width: 100%;
-    height: 100%;
+.notes-makenotes-notes-body {
+  width: 100%;
+  height: 100%;
 }
-.notes-makenotes-notes-body .react-quill{
-    width: 100%;
-    height: 88%;
-    background-color: transparent;
-    outline: transparent;
-    border: transparent;
-    resize: none;
-    padding: 10px 20px;
+.notes-makenotes-notes-body .react-quill {
+  width: 100%;
+  height: 88%;
+  background-color: transparent;
+  outline: transparent;
+  border: transparent;
+  resize: none;
+  padding: 10px 20px;
 }
-.notes-makenotes-notes-body .react-quill img{
-    max-width: 400px;
-    max-height: 400px;
+.notes-makenotes-notes-body .react-quill img {
+  max-width: 400px;
+  max-height: 400px;
 }
-.notes-makenotes-notes-body .ql-toolbar{
-    border: none !important;
-    /* border-bottom: 1px solid #9e9b9b !important; */
-    color: #9e9b9b !important;
+.notes-makenotes-notes-body .ql-toolbar {
+  border: none !important;
+  /* border-bottom: 1px solid #9e9b9b !important; */
+  color: #9e9b9b !important;
 }
-.notes-makenotes-notes-body .ql-container{
-    border: none !important;
+.notes-makenotes-notes-body .ql-container {
+  border: none !important;
 }
-.makeNotesArea .bottomRow{
-    height: 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.makeNotesArea .bottomRow {
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.makeNotesArea .colorPallete{
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 50%;
-    gap: 10px;
+.makeNotesArea .colorPallete {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  gap: 10px;
 }
 .makeNotesArea .colorLabel {
   padding: 5px 20px;
@@ -203,109 +203,113 @@
   z-index: 1;
   font-weight: bold;
 }
-.notes-makesnotes-addbutton{
-    background-color: rgb(84, 95, 246);
-    color: #fff;
-    height: 100%;
-    width: 15%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 1.5rem;
+.notes-makesnotes-addbutton {
+  background-color: rgb(84, 95, 246);
+  color: #fff;
+  height: 100%;
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1.5rem;
 }
-.notes-box{
-    height: 100%;
-    width: 84%;
-    overflow: scroll;
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    padding: auto;
-    margin: auto;
+.notes-box {
+  height: 100%;
+  width: 84%;
+  overflow: scroll;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: auto;
+  margin: auto;
+  /* min-height: 600px; */
 }
-.notes-card{
-    min-height: 150px;
-    min-width: 200px;
-    height: 40%;
-    width: 31%;
-    display: flex;
-    flex-direction: column;
-    margin: 1%;
-    border-radius: 10px;
+.notes-card {
+  min-height: 150px;
+  min-width: 200px;
+  height: 40%;
+  width: 31%;
+  margin: 1%;
 }
-.notes-card .heading{
-    cursor: move;
-    height: 30px;
-    font-size: 15px;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 10px 10px 0 0;
-    padding: 5px 10px;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.notes-card .notes-card-innerDiv{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 10px;
 }
-.notes-card .icon-pallete{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+.notes-card .heading {
+  cursor: move;
+  height: 30px;
+  font-size: 15px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+  padding: 5px 10px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.notes-card-icons{
-    height: 1rem !important;
-    width: 1rem imo !important;
-    cursor: pointer;
-    margin: 0 2px;
+.notes-card .icon-pallete {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
-.notes-card .description{
-    width: 100%;
-    height: 120px;
-    overflow: hidden;
-    font-size: 12px;
-    padding: 10px 10px;
+.notes-card-icons {
+  height: 1rem !important;
+  width: 1rem imo !important;
+  cursor: pointer;
+  margin: 0 2px;
 }
-.hidden{
-    display: none !important;
+.notes-card .description {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  font-size: 12px;
+  padding: 10px 10px;
+}
+.hidden {
+  display: none !important;
 }
 
 /* Archive */
-.archive{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+.archive {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* ShowNote */
-.show-main-area{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    height: calc(100% - 90px);
-    overflow: auto;
+.show-main-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  height: calc(100% - 90px);
+  overflow: auto;
 }
-.show-main-area .show-heading{
-    margin-bottom: 20px;
-    padding: 5px;
-    border-bottom: 1px solid #9e9b9b;
-    font-weight: bold;
+.show-main-area .show-heading {
+  margin-bottom: 20px;
+  padding: 5px;
+  border-bottom: 1px solid #9e9b9b;
+  font-weight: bold;
 }
-.show-main-area .show-body img{
-    max-height: 400px;
-    max-width: 400px;
+.show-main-area .show-body img {
+  max-height: 400px;
+  max-width: 400px;
 }
-.show-bottomRow{
-    padding: 8px;
-    height: 60px;
-    border-top: .1px solid #9e9b9b;
-    display: flex;
-    justify-content: space-between;
+.show-bottomRow {
+  padding: 8px;
+  height: 60px;
+  border-top: 0.1px solid #9e9b9b;
+  display: flex;
+  justify-content: space-between;
 }
-.show-bottomRow button{
-    border: transparent;
+.show-bottomRow button {
+  border: transparent;
 }
