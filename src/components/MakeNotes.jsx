@@ -2,10 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import PalleteButton from "./PalleteButton";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import PalleteButton from "./parts/PalleteButton";
 import Heading from "./parts/Heading";
 
 const MakeNotes = (props) => {
+  console.log(props)
   let [heading, setHeading] = useState("");
   let [notesBody, setNotesBody] = useState("");
   let [color, setColor] = useState("#545FF6");
@@ -23,7 +26,11 @@ const MakeNotes = (props) => {
     }
   }, [props.edit]);
 
-  const maxId = Math.max(...props.notes.map((note) => note.id));
+  const maxId = Math.max(
+    0,
+    ...props.notes.map((note) => note.id),
+    ...props.archiveNotes.map((note) => note.id)
+  );
 
   const editHandler = (e) => {
     const newe = props.notes.filter((element)=> element.id !== location.state.item.id);
@@ -50,9 +57,29 @@ const MakeNotes = (props) => {
     navigate("../home");
   };
 
+  const modules = {
+    toolbar : [
+      [{header : [1,2,3,4,5,6, false]}],
+      [{font : []}],
+      [{size : []}],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        {list : "ordered"},
+        {list : "bullet"},
+        {indent : "-1"},
+        {indent : "+1"},
+      ],
+      ["link", "image", "video"]
+    ]
+  }
+
   return (
     <div className="makeNotesArea">
-      <Heading back={true}/>
+      <Heading
+        back={true}
+        darkTheme={props.darkTheme}
+        setDarkTheme={props.setDarkTheme}
+      />
       <div className="notes-makenotes-div">
         <div className="notes-makenotes-notes-heading">
           <input
@@ -62,17 +89,29 @@ const MakeNotes = (props) => {
             onChange={(e) => {
               setHeading(e.target.value);
             }}
+            style={{ color: props.darkTheme ? "#9e9b9b" : "black" }}
           />
         </div>
         <div className="notes-makenotes-notes-body">
-          <textarea
+          {/* <textarea
             name=""
             id=""
             placeholder="Write your note here"
             value={notesBody}
             onChange={(e) => {
               setNotesBody(e.target.value);
-            }}></textarea>
+            }}
+            style={{ color: props.darkTheme ? "#9e9b9b" : "black" }}></textarea> */}
+
+          <ReactQuill
+            theme="snow"
+            value={notesBody}
+            onChange={setNotesBody}
+            placeholder="Write your note here"
+            style={{ color: props.darkTheme ? "#9e9b9b" : "black" }}
+            modules={modules}
+            className="react-quill"
+          />
         </div>
         <div className="bottomRow">
           <div className="colorPallete">
@@ -97,21 +136,24 @@ const MakeNotes = (props) => {
               labelName={"Random"}
             />
           </div>
-          {!props.edit && <div
-            className="notes-makesnotes-addbutton"
-            onClick={() => {
-              postHandler();
-            }}>
-            Post
-          </div>}
-          {props.edit && <div
-            className="notes-makesnotes-addbutton"
-            onClick={() => {
-              editHandler();
-            }}>
-            Edit
-          </div>}
-
+          {!props.edit && (
+            <div
+              className="notes-makesnotes-addbutton"
+              onClick={() => {
+                postHandler();
+              }}>
+              Post
+            </div>
+          )}
+          {props.edit && (
+            <div
+              className="notes-makesnotes-addbutton"
+              onClick={() => {
+                editHandler();
+              }}>
+              Edit
+            </div>
+          )}
         </div>
       </div>
     </div>

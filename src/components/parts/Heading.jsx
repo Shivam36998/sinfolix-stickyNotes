@@ -15,18 +15,44 @@ const Heading = (props) => {
   return (
     <div className="notes-headerRow">
       {" "}
-      <div>{props.back?<KeyboardBackspaceRoundedIcon className="heading-icon" onClick={()=>navigate(-1)}/>:"Hii... Shivam"}</div>
+      <div>
+        {props.back ? (
+          <KeyboardBackspaceRoundedIcon
+            className="heading-icon"
+            onClick={() => navigate(-1)}
+          />
+        ) : (
+          "Hii... Shivam"
+        )}
+      </div>
       <div>
         <div className={show ? "" : "hidden"}>
           <ArchiveIcon
             className={show ? "heading-icon" : "heading-icon hidden"}
-            onClick={()=>{navigate('/archive')}}
+            onClick={() => {
+              navigate("/archive");
+            }}
           />
-            <AccountCircleIcon className="heading-icon" />
-            <DarkModeRoundedIcon className="heading-icon"/>
-            <LightModeRoundedIcon className="heading-icon"/>
+          <AccountCircleIcon className="heading-icon" />
+          {!props.darkTheme && (
+            <DarkModeRoundedIcon
+              className="heading-icon"
+              onClick={()=>props.setDarkTheme(!props.darkTheme)}
+            />
+          )}
+          {props.darkTheme && (
+            <LightModeRoundedIcon
+              className="heading-icon"
+              onClick={() => props.setDarkTheme(!props.darkTheme)}
+            />
+          )}
         </div>
-        <MenuOpenRoundedIcon className="heading-icon" onClick={()=>{setShow(!show)}} />
+        <MenuOpenRoundedIcon
+          className="heading-icon"
+          onClick={() => {
+            setShow(!show);
+          }}
+        />
       </div>
     </div>
   );

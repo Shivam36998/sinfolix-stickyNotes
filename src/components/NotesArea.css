@@ -1,4 +1,4 @@
-.notesArea, .makeNotesArea{
+.notesArea, .makeNotesArea, .fullPage{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -141,14 +141,26 @@
     width: 100%;
     height: 100%;
 }
-.notes-makenotes-notes-body textarea{
+.notes-makenotes-notes-body .react-quill{
     width: 100%;
-    height: 90%;
+    height: 88%;
     background-color: transparent;
     outline: transparent;
     border: transparent;
     resize: none;
     padding: 10px 20px;
+}
+.notes-makenotes-notes-body .react-quill img{
+    max-width: 400px;
+    max-height: 400px;
+}
+.notes-makenotes-notes-body .ql-toolbar{
+    border: none !important;
+    /* border-bottom: 1px solid #9e9b9b !important; */
+    color: #9e9b9b !important;
+}
+.notes-makenotes-notes-body .ql-container{
+    border: none !important;
 }
 .makeNotesArea .bottomRow{
     height: 4rem;
@@ -214,14 +226,17 @@
     margin: auto;
 }
 .notes-card{
-    height: 150px;
-    width: 222px;
+    min-height: 150px;
+    min-width: 200px;
+    height: 40%;
+    width: 31%;
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 1%;
     border-radius: 10px;
 }
 .notes-card .heading{
+    cursor: move;
     height: 30px;
     font-size: 15px;
     width: 100%;
@@ -263,4 +278,34 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+}
+
+/* ShowNote */
+.show-main-area{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    height: calc(100% - 90px);
+    overflow: auto;
+}
+.show-main-area .show-heading{
+    margin-bottom: 20px;
+    padding: 5px;
+    border-bottom: 1px solid #9e9b9b;
+    font-weight: bold;
+}
+.show-main-area .show-body img{
+    max-height: 400px;
+    max-width: 400px;
+}
+.show-bottomRow{
+    padding: 8px;
+    height: 60px;
+    border-top: .1px solid #9e9b9b;
+    display: flex;
+    justify-content: space-between;
+}
+.show-bottomRow button{
+    border: transparent;
 }
