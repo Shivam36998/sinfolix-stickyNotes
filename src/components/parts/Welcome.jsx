@@ -28,7 +28,7 @@ const Welcome = (props) => {
       console.error(error);
     }
   };
-  const signInWithGoogle = async () => {
+  const signIn = async () => {
     try {
       const result =  await signInWithPopup(auth, googleProvider);
       await props.setUserEmail(result.user.email);
@@ -38,11 +38,16 @@ const Welcome = (props) => {
       if (!check.data().profile.Email)
         await createCollection(result.user.email);
       console.log("hululu ", check.data().profile.Email)
-    navigate("../home");
     } catch (error) {
       console.error(error);
     }
   };
+  const signInWithGoogle = async () => {
+    signIn();
+    setTimeout(()=>{
+      navigate("home");
+    }, 1000)
+  }
   return (
     <div className="wl-container">
       <h1>Welcome To Sticky Notes</h1>
@@ -56,7 +61,7 @@ const Welcome = (props) => {
       <Button
         variant="outlined"
         onClick={() => {
-          navigate("signin");
+          navigate("../signin");
         }}>
         Login With Email And Password
       </Button>

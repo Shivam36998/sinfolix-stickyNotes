@@ -35,7 +35,7 @@ function App() {
   let [notes, setNotes] = useState([]);
   let [archiveNotes, setArchiveNotes] = useState([]);
 
-  console.log(auth?.currentUser?.email, notes, archiveNotes, userEmail)
+  // console.log(auth?.currentUser?.email, notes, archiveNotes, userEmail)
   useEffect(() => {
     if (userEmail) {
       let documentRef = (doc(db, "stickyNotes", userEmail));
@@ -54,7 +54,7 @@ function App() {
       userData();
     }
   }, [userEmail]);
-  console.log(auth?.currentUser?.email, notes, archiveNotes, userEmail)
+  // console.log(auth?.currentUser?.email, notes, archiveNotes, userEmail)
 
   const router = createBrowserRouter(
     createRoutesFromElements(

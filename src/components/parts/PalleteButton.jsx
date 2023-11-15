@@ -13,8 +13,8 @@ const PalleteButton = (props) => {
           elements[i].style.borderColor = "transparent";
         }
 
-        document.getElementById(props.colorCode).style.border =
-          "1px solid black";
+        document.getElementById(props.colorCode).style.borderColor =
+          "black";
       }}>
       <div
         className="colorCircle"

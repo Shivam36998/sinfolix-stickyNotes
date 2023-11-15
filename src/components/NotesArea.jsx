@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./NotesArea.css";
 import NotesCard from "./parts/NotesCard";
 import { useNavigate } from "react-router-dom";
@@ -9,8 +9,12 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Heading from "./parts/Heading";
 
 const NotesArea = (props) => {
+  console.log("props", props)
   let [list, setList] = useState(props.notes);
-
+  useEffect(()=>{
+    setList(props.notes);
+  }, [props.notes]);
+  console.log("list", list);
   const navigate = useNavigate();
   const searchHandler = (e) => {
     let key = e.target.value.toLowerCase().trim();

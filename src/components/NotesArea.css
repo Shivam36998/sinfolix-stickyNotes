@@ -139,7 +139,7 @@
 }
 .notes-makenotes-notes-body {
   width: 100%;
-  height: 100%;
+  height: 84%;
 }
 .notes-makenotes-notes-body .react-quill {
   width: 100%;
@@ -186,7 +186,7 @@
   position: relative;
   z-index: 2;
   background-color: transparent;
-  border: transparent;
+  /* border: transparent; */
 }
 .makeNotesArea .colorLabel.color-border {
   border: 1px solid black;
@@ -231,6 +231,7 @@
   overflow: scroll;
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   padding: auto;
   margin: auto;
@@ -322,4 +323,103 @@
 }
 .show-bottomRow button {
   border: transparent;
+}
+
+@media screen and (max-width: 650px) {
+  .notes-firstRow{
+    flex-direction: column-reverse;
+    gap: 10px;
+    align-items: center;
+  }
+  .notes-firstRow div{
+    width: 90%;
+  }
+  .notes-box{
+    width: 99%;
+  }
+  .notes-card{
+    min-width: 250px;
+    min-height: 200px;
+    margin: 2% 1%;
+  }
+  .notes-makenotes-div{
+    height: 90%;
+    margin-bottom: 8px;
+  }
+  .colorLabel{
+    padding: 0 !important;
+    gap: 0 !important;
+    border: 2.5px solid !important;
+    border-radius: 50% !important;
+  }
+  .colorCircle{
+    width: 1.8rem !important;
+    height: 1.8rem !important;
+  }
+  .labelName{
+    display: none;
+  }
+  .notes-makesnotes-addbutton{
+    width: max-content;
+    padding: 2px 8px;
+    font-size: 1.4rem;
+    height: max-content;
+  }
+  .notes-makenotes-notes-body .react-quill{
+    padding: 5px 0;
+  }
+  .ql-toolbar svg{
+    height: .6rem;
+    width: .6rem;
+  }
+  .ql-toolbar .ql-picker-label{
+    width: fit-content !important;
+    display: flex;
+  }
+  .ql-snow .ql-picker{
+    width: fit-content !important;
+    font-size: 10px !important;
+  }
+  .ql-snow .ql-picker .ql-picker-label{
+    padding-right: 20px;
+  }
+  .ql-snow .ql-picker.ql-header{
+    width: fit-content !important;
+  }
+  .ql-formats{
+    margin-bottom: 5px !important;
+  }
+  .ql-formats button{
+    height: fit-content !important;
+    width: fit-content !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .show-main-area{
+    padding: 10px;
+  }
+  .show-main-area .show-body{
+    max-width: 320px;
+  }
+  .show-main-area .show-body img{
+    max-width: 250px;
+    max-height: 250px;
+    margin: 5px 30px;
+  }
+  .ql-editor{
+    height: 95% !important;
+  }
+  .signup-buttons{
+    width: 100%;
+  }
+  .signup .submit-button{
+    font-size: 1rem;
+  }
+  .signup p{
+    font-size: 12px;
+  }
+  .password-footer{
+    font-size: 14px;
+  }
 }

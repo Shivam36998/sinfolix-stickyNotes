@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import PalleteButton from "./parts/PalleteButton";
+import PalleteButton from "./parts/PalleteButton.jsx";
 import Heading from "./parts/Heading";
 import { updateDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "./config/firebase";
@@ -18,6 +18,22 @@ const MakeNotes = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
   let documentRef = doc(db, "stickyNotes", props.userEmail);
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ font: [] }],
+      [{ size: [] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link", "image", "video"],
+    ],
+  };
 
   useEffect(() => {
     if (props.edit) {
@@ -73,22 +89,6 @@ const MakeNotes = (props) => {
       }
     }
     navigate("../home");
-  };
-
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      [{ font: [] }],
-      [{ size: [] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link", "image", "video"],
-    ],
   };
 
   return (

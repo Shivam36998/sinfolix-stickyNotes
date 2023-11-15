@@ -136,7 +136,6 @@ const Signup = (props) => {
             <Link to="/signin"> sign in</Link>
           </span>
         </p>
-        <button onClick={signInWithGoogle}>Sign in with Google</button>
         <p className="password-footer">{passwordError}</p>
       </div>
     </>

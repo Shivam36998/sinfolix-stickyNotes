@@ -22,7 +22,7 @@ const Heading = (props) => {
             onClick={() => navigate(-1)}
           />
         ) : (
-          "Hii... Shivam"
+          "Hii... "
         )}
       </div>
       <div>
@@ -33,7 +33,7 @@ const Heading = (props) => {
               navigate("/archive");
             }}
           />
-          <AccountCircleIcon className="heading-icon" />
+          {/* <AccountCircleIcon className="heading-icon" /> */}
           {!props.darkTheme && (
             <DarkModeRoundedIcon
               className="heading-icon"

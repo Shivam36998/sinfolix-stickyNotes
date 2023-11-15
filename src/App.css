@@ -117,3 +117,38 @@ body{
 .password-footer{
     color: red;
 }
+
+@media screen and (max-width: 800px) {
+    .main-container{
+        width: 100vw;
+        height: 100vh;
+    }
+    .login-container{
+        flex-direction: column;
+        height: 100%;
+    }
+    .wl-container{
+        gap: 10px;
+    }
+    .login-container .logo {
+        margin: 30px;
+        display: none;
+    }
+    .login-container .logo img{
+        height: 15rem;
+    }
+    .wl-container button{
+        width: 90%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .wl-container{
+        padding: 10px 50px;
+    }
+    .wl-container h1{
+        text-align: center;
+    }
+    .wl-container button{
+        font-size: .8rem;
+    }
+}
