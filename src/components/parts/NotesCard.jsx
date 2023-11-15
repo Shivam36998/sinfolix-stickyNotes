@@ -5,23 +5,31 @@ import { FaEdit } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import UnarchiveRoundedIcon from "@mui/icons-material/UnarchiveRounded";
+import { updateDoc, doc, getDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 const NotesCard = forwardRef((props, ref) => {
   const navigate = useNavigate();
+  let documentRef = doc(db, "stickyNotes", props.userEmail)
 
   const deleteHandler = () => {
     let deletedList = props.notes.filter((item) => item.id !== props.item.id);
     props.setNotes(deletedList);
     props.setList(deletedList);
+    updateDoc(documentRef, { notes: deletedList });
   };
   const archiveDeleteHandler = () => {
     let deletedlist = props.archiveNotes.filter(
       (item) => item.id !== props.item.id
-    );
+      );
+    props.setList(deletedlist);
     props.setArchiveNotes(deletedlist);
+    updateDoc(documentRef, {archiveNotes : deletedlist});
   }
   const archiveHandler = () => {
-    props.setArchiveNotes([props.item, ...props.archiveNotes])
+    let newList = [props.item, ...props.archiveNotes];
+    props.setArchiveNotes(newList);
+    updateDoc(documentRef, { archiveNotes: newList });
     deleteHandler();
   }
   const unArchiveHandler = () => {
@@ -29,7 +37,10 @@ const NotesCard = forwardRef((props, ref) => {
       (item) => item.id !== props.item.id
     );
     props.setArchiveNotes(deletedList);
-    props.setNotes([props.item, ...props.notes]);
+    updateDoc(documentRef, { archiveNotes: deletedList });
+    let newList = [props.item, ...props.notes];
+    props.setNotes(newList);
+    updateDoc(documentRef, { notes : newList });
     props.setList(deletedList);
   }
   const readHandler = () => {

@@ -77,10 +77,12 @@ const NotesArea = (props) => {
                         setArchiveNotes={props.setArchiveNotes}
                         provided={provided}
                         innerRef={provided.innerRef}
+                        userEmail = {props.userEmail}
                       />
                     )}
                   </Draggable>
                 ))}
+                {!list.length && <div> Nothing to See here!! Create a new Note</div>}
               </div>
             )}
           </Droppable>

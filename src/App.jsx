@@ -1,92 +1,60 @@
 /** @format */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 import Welcome from "./components/parts/Welcome";
 import Login from "./components/Login";
 import NotesArea from "./components/NotesArea";
 import MakeNotes from "./components/MakeNotes";
-import { Route, Routes, BrowserRouter, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  BrowserRouter,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 import Signup from "./components/parts/Signup";
 import SignIn from "./components/parts/SignIn";
 import Archive from "./components/Archive";
 import ShowNote from "./components/ShowNote";
+import { db, auth } from "./components/config/firebase";
+import {
+  getDocs,
+  collection,
+  doc,
+  getDoc,
+  documentId,
+} from "firebase/firestore";
 
 function App() {
+  let [userEmail, setUserEmail] = useState("");
+  let [data, setData] = useState();
   let [darkTheme, setDarkTheme] = useState(false);
-  let [notes, setNotes] = useState([
-    {
-      id: 1,
-      heading: "Note 1",
-      body: "This is the body of the first note.",
-      label: "imp",
-      color: "#545FF6",
-    },
-    {
-      id: 2,
-      heading: "Note 2",
-      body: "This is the body of the second note.",
-      label: "imp",
-      color: "#545FF6",
-    },
-    {
-      id: 3,
-      heading: "Note 3",
-      body: "This is the body of the third note.",
-      label: "imp",
-      color: "#545FF6",
-    },
-    {
-      id: 4,
-      heading: "Note 4",
-      body: "This is the body of the fourth note.",
-      label: "imp",
-      color: "#545FF6",
-    },
-    {
-      id: 5,
-      heading: "Note 5",
-      body: "This is the body of the fifth note.",
-      color: "#545FF6",
-    },
-  ]);
-  let [archiveNotes, setArchiveNotes] = useState([
-    {
-      id: 1,
-      heading: "Note 1",
-      body: "This is the body of the first note.",
-      label: "imp",
-      color: "#545FF6",
-    },
-    {
-      id: 2,
-      heading: "Note 2",
-      body: "This is the body of the second note.",
-      label: "imp",
-      color: "#545FF6",
-    },
-    {
-      id: 3,
-      heading: "Note 3",
-      body: "This is the body of the third note.",
-      label: "imp",
-      color: "#545FF6",
-    },
-    {
-      id: 4,
-      heading: "Note 4",
-      body: "This is the body of the fourth note.",
-      label: "imp",
-      color: "#545FF6",
-    },
-    {
-      id: 5,
-      heading: "Note 5",
-      body: "This is the body of the fifth note.",
-      color: "#545FF6",
-    },
-  ]);
+  let [notes, setNotes] = useState([]);
+  let [archiveNotes, setArchiveNotes] = useState([]);
+
+  console.log(auth?.currentUser?.email, notes, archiveNotes, userEmail)
+  useEffect(() => {
+    if (userEmail) {
+      let documentRef = (doc(db, "stickyNotes", userEmail));
+      const userData = async () => {
+        try {
+          const item = await getDoc(documentRef);
+          if (item.data()) {
+            setData(item.data());
+            setNotes(item.data().notes);
+            setArchiveNotes(item.data().archiveNotes);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      userData();
+    }
+  }, [userEmail]);
+  console.log(auth?.currentUser?.email, notes, archiveNotes, userEmail)
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -96,13 +64,28 @@ function App() {
           element={<Login />}>
           <Route
             path=""
-            element={<Welcome />}></Route>
+            element={
+              <Welcome
+                userEmail={userEmail}
+                setUserEmail={setUserEmail}
+              />
+            }></Route>
           <Route
             path="signup"
-            element={<Signup />}></Route>
+            element={
+              <Signup
+                userEmail={userEmail}
+                setUserEmail={setUserEmail}
+              />
+            }></Route>
           <Route
             path="signin"
-            element={<SignIn />}></Route>
+            element={
+              <SignIn
+                userEmail={userEmail}
+                setUserEmail={setUserEmail}
+              />
+            }></Route>
         </Route>
         <Route
           path="/home"
@@ -114,6 +97,7 @@ function App() {
               setArchiveNotes={setArchiveNotes}
               darkTheme={darkTheme}
               setDarkTheme={setDarkTheme}
+              userEmail={userEmail}
             />
           }></Route>
         <Route
@@ -122,6 +106,7 @@ function App() {
             <MakeNotes
               notes={notes}
               setNotes={setNotes}
+              userEmail={userEmail}
               darkTheme={darkTheme}
               setDarkTheme={setDarkTheme}
               archiveNotes={archiveNotes}
@@ -136,6 +121,7 @@ function App() {
               darkTheme={darkTheme}
               setDarkTheme={setDarkTheme}
               archiveNotes={archiveNotes}
+              userEmail={userEmail}
               edit={1}
             />
           }></Route>
@@ -149,6 +135,7 @@ function App() {
               setArchiveNotes={setArchiveNotes}
               darkTheme={darkTheme}
               setDarkTheme={setDarkTheme}
+              userEmail={userEmail}
             />
           }></Route>
         <Route
@@ -182,4 +169,3 @@ function App() {
 }
 
 export default App;
-

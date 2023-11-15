@@ -9,28 +9,71 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { auth, googleProvider } from "../config/firebase";
+import { addDoc, collection, doc, setDoc} from "firebase/firestore";
+import { db } from "../config/firebase";
+import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+
 
 const Signup = (props) => {
-  let [userName, setUserName] = useState("");
+
+  let {userEmail, setUserEmail} = props;
   let [password, setpassword] = useState("");
   let [checkPassword, setCheckPassword] = useState("");
   let [passwordError, setPasswordError] = useState("");
 
   const navigate = useNavigate();
 
-  const submitHandler = () => {
-    if (userName.length == 0) {
+  const createCollection = async () => {
+    try {
+      const collectionRef = doc(db, "stickyNotes", userEmail);
+      await setDoc(collectionRef, {
+        notes: [],
+        archiveNotes: [],
+        profile: {
+          Email: userEmail,
+          notes: 0,
+          archivedNotes: 0,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const submitHandler = async() => {
+    if (userEmail.length == 0) {
       setPasswordError("Name cannot be empty");
     } else if (password.length === 0) {
       setPasswordError("Password cannot be empty");
     } else if (password === checkPassword) {
       setPasswordError("");
+      await createUserWithEmailAndPassword(auth, userEmail, password);
+      await createCollection();
       navigate('../home');
     } else {
       setPasswordError("Passwords do not match");
     }
   };
 
+  const signInWithGoogle =  async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      await createUserWithEmailAndPassword(auth, userEmail, password);
+      await createCollection();
+      navigate("../home");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const signOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <>
       <div className="signup">
@@ -45,13 +88,13 @@ const Signup = (props) => {
         <div className="formArea">
           <FormGroup className="form">
             <FormControl className="inputdiv">
-              <InputLabel className="label"> Name </InputLabel>
+              <InputLabel className="label"> Email </InputLabel>
               <Input
                 className="input"
-                type="text"
-                value={userName}
+                type="email"
+                value={userEmail}
                 onChange={(e) => {
-                  setUserName(e.target.value);
+                  setUserEmail(e.target.value);
                 }}
               />
             </FormControl>
@@ -93,6 +136,7 @@ const Signup = (props) => {
             <Link to="/signin"> sign in</Link>
           </span>
         </p>
+        <button onClick={signInWithGoogle}>Sign in with Google</button>
         <p className="password-footer">{passwordError}</p>
       </div>
     </>
