@@ -43,7 +43,7 @@ const Welcome = (props) => {
   const signInWithGoogle = async () => {
     signIn();
     setTimeout(()=>{
-      navigate("home");
+      navigate("../home");
     }, 1000)
   }
   return (
