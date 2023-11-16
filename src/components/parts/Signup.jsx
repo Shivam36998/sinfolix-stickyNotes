@@ -23,22 +23,23 @@ const Signup = (props) => {
   let [passwordError, setPasswordError] = useState("");
 
   const navigate = useNavigate();
-  const collectionRef = doc(db, "stickyNotes", userEmail);
+  console.log("now",userEmail)
 
   const createCollection = async () => {
-    try {
-      await setDoc(collectionRef, {
-        notes: [],
-        archiveNotes: [],
-        profile: {
-          Email: userEmail,
-          notes: 0,
-          archivedNotes: 0,
-        },
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    const collectionRef = doc(db, "stickyNotes", userEmail);
+      try {
+        await setDoc(collectionRef, {
+          notes: [],
+          archiveNotes: [],
+          profile: {
+            Email: userEmail,
+            notes: 0,
+            archivedNotes: 0,
+          },
+        });
+      } catch (error) {
+        console.error(error);
+      }
   }
 
   const submitHandler = async() => {
@@ -47,10 +48,12 @@ const Signup = (props) => {
     } else if (password.length === 0) {
       setPasswordError("Password cannot be empty");
     } else if (password === checkPassword) {
+      const collectionRef = doc(db, "stickyNotes", userEmail);
       const check = await getDoc(collectionRef);
-      setPasswordError("");
       if(check._document){
         setPasswordError("account already exists, please sign in")
+        // setPasswordError("");
+        console.log("heree", passwordError)
       }
       else {
         await createUserWithEmailAndPassword(auth, userEmail, password);
