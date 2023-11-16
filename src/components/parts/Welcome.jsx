@@ -34,9 +34,7 @@ const Welcome = (props) => {
       await props.setUserEmail(result.user.email);
       const collectionRef = doc(db, "stickyNotes", result.user.email);
       const check = await getDoc(collectionRef);
-
-      if (!check.data().profile.Email)
-        await createCollection(result.user.email);
+      if (!(check._document)) await createCollection(result.user.email);
       console.log("hululu ", check.data().profile.Email)
     } catch (error) {
       console.error(error);

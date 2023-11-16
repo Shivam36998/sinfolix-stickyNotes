@@ -10,7 +10,7 @@ import {
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, googleProvider } from "../config/firebase";
-import { addDoc, collection, doc, setDoc} from "firebase/firestore";
+import { addDoc, collection, doc, setDoc, getDoc} from "firebase/firestore";
 import { db } from "../config/firebase";
 import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 
@@ -23,10 +23,10 @@ const Signup = (props) => {
   let [passwordError, setPasswordError] = useState("");
 
   const navigate = useNavigate();
+  const collectionRef = doc(db, "stickyNotes", userEmail);
 
   const createCollection = async () => {
     try {
-      const collectionRef = doc(db, "stickyNotes", userEmail);
       await setDoc(collectionRef, {
         notes: [],
         archiveNotes: [],
@@ -47,10 +47,16 @@ const Signup = (props) => {
     } else if (password.length === 0) {
       setPasswordError("Password cannot be empty");
     } else if (password === checkPassword) {
+      const check = await getDoc(collectionRef);
       setPasswordError("");
-      await createUserWithEmailAndPassword(auth, userEmail, password);
-      await createCollection();
-      navigate('../home');
+      if(check._document){
+        setPasswordError("account already exists, please sign in")
+      }
+      else {
+        await createUserWithEmailAndPassword(auth, userEmail, password);
+        await createCollection();
+        navigate('../home');
+      }
     } else {
       setPasswordError("Passwords do not match");
     }
