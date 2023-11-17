@@ -8,6 +8,7 @@ import PalleteButton from "./parts/PalleteButton.jsx";
 import Heading from "./parts/Heading";
 import { updateDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "./config/firebase";
+import AttachmentIcon from "@mui/icons-material/Attachment";
 
 const MakeNotes = (props) => {
   // console.log(props);
@@ -17,7 +18,7 @@ const MakeNotes = (props) => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  let documentRef = doc(db, "stickyNotes", props.userEmail);
+  // let documentRef = doc(db, "stickyNotes", props.userEmail);
 
   const modules = {
     toolbar: [
@@ -90,6 +91,22 @@ const MakeNotes = (props) => {
     }
     navigate("../home");
   };
+
+  // // adding files upload button
+  // let formatPanel = document.getElementsByClassName("ql-toolbar");
+  // // formatPanel.innerHTML.appendChild(filebutton);
+  // formatPanel = {
+  //   ...formatPanel,
+  //   attachmentIcon: React.createElement("div"),
+  // };
+
+  // console.log(formatPanel)
+  // // const lastPanel = formatPanel.item(formatPanel.length-1);
+  // // filebutton.innerHTML = <AttachmentIcon/>;
+  // // filebutton.innerHTML = "<AttachmentIcon/>";
+  // // console.log(lastPanel.innerHTML)
+
+  // // console.log(lastPanel);
 
   return (
     <div className="makeNotesArea">

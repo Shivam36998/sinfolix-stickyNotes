@@ -7,6 +7,19 @@ import { doc, getDoc  } from 'firebase/firestore';
 
 const Archive = (props) => {
   let [list, setList] = useState(props.archiveNotes);
+  const dragHandler = (result) => {
+    //  console.log("drag event occured", result)
+    const { destination, source, type } = result;
+    if (!destination) return;
+    else if (destination.index === source.index) return;
+    else if (type === "group") {
+      const newlist = [...list];
+      const removedNote = newlist.splice(source.index, 1)[0];
+      newlist.splice(destination.index, 0, removedNote);
+      setList(newlist);
+      // console.log(removedNote);
+    }
+  };
   return (
     <div className="archive">
       <Heading
@@ -14,8 +27,7 @@ const Archive = (props) => {
         darkTheme={props.darkTheme}
         setDarkTheme={props.setDarkTheme}
       />
-      <DragDropContext
-        onDragEnd={(result) => console.log("drag event occured", result)}>
+      <DragDropContext onDragEnd={dragHandler} >
         <div className='archive-notes-box'>
           <Droppable
             droppableId="Root"

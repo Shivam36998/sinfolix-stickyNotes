@@ -9,6 +9,7 @@ import { updateDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 const NotesCard = forwardRef((props, ref) => {
+  console.log(props.item.heading, props.item.body)
   const navigate = useNavigate();
   let documentRef = doc(db, "stickyNotes", props.userEmail)
 
