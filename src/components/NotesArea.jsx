@@ -9,12 +9,12 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Heading from "./parts/Heading";
 
 const NotesArea = (props) => {
-  console.log("props", props)
+  // console.log("props", props)
   let [list, setList] = useState(props.notes);
   useEffect(()=>{
     setList(props.notes);
   }, [props.notes]);
-  console.log("list", list);
+  // console.log("list", list);
   const navigate = useNavigate();
   const searchHandler = (e) => {
     let key = e.target.value.toLowerCase().trim();
@@ -25,6 +25,19 @@ const NotesArea = (props) => {
     );
     setList(searchnotes);
   };
+  const dragHandler = (result) => {
+    //  console.log("drag event occured", result)
+    const {destination, source, type} = result;
+    if(!destination) return;
+    else if (destination.index === source.index) return;
+    else if(type==="group") {
+      const newlist = [...list];
+      const removedNote = newlist.splice(source.index, 1)[0];
+      newlist.splice(destination.index, 0, removedNote);
+      setList(newlist);
+      // console.log(removedNote);
+    }
+  }
 
   return (
     <div className="notesArea">
@@ -53,8 +66,7 @@ const NotesArea = (props) => {
           />
         </div>
       </div>
-      <DragDropContext
-        onDragEnd={(result) => console.log("drag event occured", result)}>
+      <DragDropContext onDragEnd={dragHandler}>
         <div className="notes-main-Area">
           <Droppable
             droppableId="Root"
@@ -86,6 +98,7 @@ const NotesArea = (props) => {
                     )}
                   </Draggable>
                 ))}
+                {provided.placeholder}
                 {!list.length && <div> Nothing to See here!! Create a new Note</div>}
               </div>
             )}
